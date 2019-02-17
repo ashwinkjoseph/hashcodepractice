@@ -8,7 +8,7 @@ def calcDistance(vehicle, ride, b, s):
     distanceToStart = abs(vehicle[2][0]-ride[1]) + abs(vehicle[2][1] - ride[2])
     points = 0
     count = ride[6] if s > ride[6] else s
-    print("vehicle: ", vehicle)
+    # print("vehicle: ", vehicle)
     print("ride: ", ride)
     print("distanceTostart: ", distanceToStart)
     if(distanceToStart + vehicle[1] < ride[5]):
@@ -21,23 +21,20 @@ def calcDistance(vehicle, ride, b, s):
 
 with open("question.txt", "r") as q:
     r, c, v, ri, b, s = [int(item) for item in q.readline().rstrip('\n').lstrip('\n').split(' ')]
-    print((r, c, v, ri, b, s))
+    print("first line: ", (r, c, v, ri, b, s))
     rides = [prepare_ride(line, ind) for ind, line in enumerate(q)]
-    print(rides)
     rides = sorted(rides, key=lambda x: x[5])
-    print(rides)
-
+    print("sorted rides: ", rides)
     vehicleMeta = [[0, 0, (0, 0), []] for _ in range(0,v)] #score, count, current/free pos for each vehicle
-    print(vehicleMeta)
 
     minCount = 0
     infChech = 0
     while len(rides)>0:
         for index, ride in enumerate(rides):
-            print("rides: ", rides)
-            print("enumerate rides: ", enumerate(rides))
-            print("index: ", index)
-            print("ride: ", ride)
+            # print("rides: ", rides)
+            # print("enumerate rides: ", enumerate(rides))
+            # print("index: ", index)
+            # print("ride: ", ride)
             vehicleIntermediate = [calcDistance(vehicle, ride, b, s) for vehicle in vehicleMeta]
             print("vehicleIntermediate: ", vehicleIntermediate)
             vehicleIntermediateSelected = sorted(vehicleIntermediate, key=lambda x: x[2])[-1]
